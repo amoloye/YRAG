@@ -169,3 +169,10 @@ PDF → Text Extraction → Chunking → Embedding → HNSW Index
 
 - Benchmark retrieval performance quantitatively
 
+---------------------------------------------------------------------------------------------------------------------------------
+
+## Image Generated
+
+
+<img width="834" height="716" alt="Screenshot 2026-02-11 at 14 40 07" src="https://github.com/user-attachments/assets/f15e0328-bd22-4163-ae0a-e7541384179b" />
+
