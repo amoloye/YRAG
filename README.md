@@ -1,5 +1,5 @@
-#RAG-Based PDF Retrieval System (spaCy + HNSW)
-##Overview
+# RAG-Based PDF Retrieval System (spaCy + HNSW)
+## Overview
 
 This project implements a lightweight **Retrieval-Augmented Generation (RAG)** pipeline for semantic search over PDF documents. The system extracts text from PDFs, generates vector embeddings using spaCy, indexes them with HNSW, and retrieves relevant passages for language model–based answer generation.
 
@@ -7,65 +7,65 @@ The implementation prioritises reproducibility, CPU compatibility, and minimal d
 
 ---------------------------------------------------------------------------------------------------------------------------------
 
-##Motivation
+## Motivation
 
 Many vector search pipelines rely on heavy machine learning frameworks such as **PyTorch** (e.g., Sentence-Transformers, FAISS, ChromaDB). These can introduce compatibility and installation issues, particularly on macOS Intel environments.
 
 This project intentionally uses:
 
-**spaCy (en_core_web_md)** for static word embeddings
+- **spaCy (en_core_web_md)** for static word embeddings
 
-**hnswlib (HNSW)** for approximate nearest neighbour search
+- **hnswlib (HNSW)** for approximate nearest neighbour search
 
 This approach avoids GPU requirements and large deep learning dependencies while maintaining functional semantic retrieval.
 
 ---------------------------------------------------------------------------------------------------------------------------------
 
-##Methodology
+## Methodology
 
 The pipeline consists of the following stages:
 
-###Document Ingestion
+- ### Document Ingestion
 
-PDF parsing via PyMuPDF
+  - PDF parsing via PyMuPDF
 
-Page-level text extraction
+  - Page-level text extraction
 
-###Chunking
+- ### Chunking
 
-Sentence-aware segmentation
+  - Sentence-aware segmentation
 
-Maximum character constraint per chunk
+  - Maximum character constraint per chunk
 
-###Embedding
+- ### Embedding
 
-spaCy en_core_web_md
+  - spaCy en_core_web_md
 
-300-dimensional static word vectors
+  - 300-dimensional static word vectors
 
-Mean pooling over document tokens
+  - Mean pooling over document tokens
 
-###Indexing
+- ### Indexing
 
-HNSW (Hierarchical Navigable Small World) graph
+  - HNSW (Hierarchical Navigable Small World) graph
 
-Cosine similarity space
+  - Cosine similarity space
 
-Persistent index storage
+  - Persistent index storage
 
-###Retrieval-Augmented Generation
+- ### Retrieval-Augmented Generation
 
-Query embedding
+  - Query embedding
 
-Top-k nearest neighbour retrieval
+  - Top-k nearest neighbour retrieval
 
-Context assembly
+  - Context assembly
 
-###Response generation via Groq LLM
+- ### Response generation via Groq LLM
 
 ---------------------------------------------------------------------------------------------------------------------------------
 
-##System Architecture
+## System Architecture
 
 PDF → Text Extraction → Chunking → Embedding → HNSW Index
                                                 ↓
@@ -75,94 +75,97 @@ PDF → Text Extraction → Chunking → Embedding → HNSW Index
 
 ---------------------------------------------------------------------------------------------------------------------------------                                      
 
-##Technical Design Choices
-spaCy Embeddings
+## Technical Design Choices
+- spaCy Embeddings
 
-300-dimensional static vectors
+- 300-dimensional static vectors
 
-No PyTorch dependency
+- No PyTorch dependency
 
-Fully CPU-compatible
+- Fully CPU-compatible
 
-Stable across macOS Intel environments
-
----------------------------------------------------------------------------------------------------------------------------------
-
-##Trade-off:
-
-Lower semantic performance compared to transformer-based embeddings
-
-Chosen for simplicity and system stability
-
-HNSW (hnswlib)
-
-Approximate nearest neighbour search
-
-Logarithmic retrieval complexity
-
-Memory-efficient
-
-CPU-based
-
-Supports persistence
-
-HNSW provides scalable semantic search without requiring FAISS or GPU acceleration.
+- Stable across macOS Intel environments
 
 ---------------------------------------------------------------------------------------------------------------------------------
 
-##Example Query
+## Trade-off:
 
-###Input:
+- Lower semantic performance compared to transformer-based embeddings
+
+- Chosen for simplicity and system stability
+
+- HNSW (hnswlib)
+
+- Approximate nearest neighbour search
+
+- Logarithmic retrieval complexity
+
+- Memory-efficient
+
+- CPU-based
+
+- Supports persistence
+
+- HNSW provides scalable semantic search without requiring FAISS or GPU acceleration.
+
+---------------------------------------------------------------------------------------------------------------------------------
+
+## Example Query
+
+### Input:
 
 "What is loadbearing?"
 
 
-###Process:
+### Process:
 
-Embed query
+- Embed query
 
-Retrieve top-k similar chunks
+- Retrieve top-k similar chunks
 
-Provide retrieved context to LLM
+- Provide retrieved context to LLM
 
-Generate a concise answer grounded in document content
-
----------------------------------------------------------------------------------------------------------------------------------
-
-##Dependencies
-
-Core libraries:
-
-Python 3.13
-
-spaCy
-
-hnswlib
-
-PyMuPDF
-
-NumPy
-
-LangChain
-
-Groq API
-
-Limitations
-
-Static embeddings (no contextual transformer encoding)
-
-Retrieval quality is dependent on chunk granularity
-
-No reranking or hybrid search implemented
+- Generate a concise answer grounded in document content
 
 ---------------------------------------------------------------------------------------------------------------------------------
 
-##Future Work
+## Dependencies
 
-Replace static embeddings with lightweight transformer embeddings
+- Core libraries:
 
-Add hybrid keyword + vector search
+- Python 3.13
 
-Implement cross-encoder reranking
+- spaCy
 
-Benchmark retrieval performance quantitatively
+- hnswlib
+
+- PyMuPDF
+
+- NumPy
+
+- LangChain
+
+- Groq API
+
+---------------------------------------------------------------------------------------------------------------------------------
+
+## Limitations
+
+- Static embeddings (no contextual transformer encoding)
+
+- Retrieval quality is dependent on chunk granularity
+
+- No reranking or hybrid search implemented
+
+---------------------------------------------------------------------------------------------------------------------------------
+
+## Future Work
+
+- Replace static embeddings with lightweight transformer embeddings
+
+- Add hybrid keyword + vector search
+
+- Implement cross-encoder reranking
+
+- Benchmark retrieval performance quantitatively
+
