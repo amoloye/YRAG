@@ -1,0 +1,23 @@
+[project]
+name = "ytrag"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "annoy>=1.17.3",
+    "cohere>=5.20.2",
+    "hnswlib>=0.8.0",
+    "ipykernel>=7.1.0",
+    "langchain>=1.2.8",
+    "langchain-community>=0.4.1",
+    "langchain-core>=1.2.8",
+    "langchain-groq>=1.1.2",
+    "numpy>=2.4.2",
+    "openai>=2.16.0",
+    "pymupdf>=1.26.7",
+    "pypdf>=6.6.2",
+    "python-dotenv>=1.2.1",
+    "scikit-learn>=1.8.0",
+    "spacy>=3.8.11",
+]

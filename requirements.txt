@@ -1,0 +1,13 @@
+langchain
+langchain-core
+langchain-community
+pypdf
+pymupdf
+numpy
+annoy
+hnswlib
+scikit-learn
+python-dotenv
+spacy
+langchain-groq
+
